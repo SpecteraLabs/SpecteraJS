@@ -1,0 +1,15 @@
+{
+  "name": "publicbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "discord.js": "^13.0.0-dev.e980948de55e91e59c9e3293ac76bc645a058a53"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
