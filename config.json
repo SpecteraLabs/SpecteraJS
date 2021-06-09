@@ -1,4 +1,5 @@
 {
     "token": "ODA4NTQ4MTk2MzA4NjE1MjIw.YCIJMA.MapWiDxfpQiY2FkYd-6ydV38XbY",
-    "prefix": "+"
+    "prefix": "+",
+    "mongoPath": "mongodb+srv://Obligator:Ecotis3017@cluster0.oin1d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }

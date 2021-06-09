@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
-/* eslint-disable no-shadow-restricted-names */
-const { prefix } = require('../config.json');
+const mongo = require('../mongo');
+const commandPrefixSchema = require('../schemas/command-prefix-schema');
+const { prefix: globalPrefix } = require('../config.json');
+const guildPrefixes = {};
 
 const validatePermissions = (permissions) => {
 	const validPermissions = [
@@ -56,14 +58,12 @@ module.exports = (client, commandOptions) => {
 		callback,
 	} = commandOptions;
 
-	// Ensure the command and aliases are in an array
 	if (typeof commands === 'string') {
 		commands = [commands];
 	}
 
 	console.log(`Registering command "${commands[0]}"`);
 
-	// Ensure the permissions are in an array and are all valid
 	if (permissions.length) {
 		if (typeof permissions === 'string') {
 			permissions = [permissions];
@@ -71,10 +71,10 @@ module.exports = (client, commandOptions) => {
 
 		validatePermissions(permissions);
 	}
-
-	// Listen for messages
-	client.on('message', (message) => {
+	client.on('message', async (message) => {
 		const { member, content, guild } = message;
+
+		const prefix = guildPrefixes[guild.id] || globalPrefix;
 
 		for (const alias of commands) {
 			const command = `${prefix}${alias.toLowerCase()}`;
@@ -83,17 +83,13 @@ module.exports = (client, commandOptions) => {
 				content.toLowerCase().startsWith(`${command} `) ||
         content.toLowerCase() === command
 			) {
-				// A command has been ran
-
-				// Ensure the user has the required permissions
 				for (const permission of permissions) {
-					if (!member.hasPermission(permission)) {
+					if (!member.permissions.has(permission)) {
 						message.reply(permissionError);
 						return;
 					}
 				}
 
-				// Ensure the user has the required roles
 				for (const requiredRole of requiredRoles) {
 					const role = guild.roles.cache.find(
 						(role) => role.name === requiredRole,
@@ -107,16 +103,11 @@ module.exports = (client, commandOptions) => {
 					}
 				}
 
-				// Split on any number of spaces
-				const arguments = content.split(/[ ]+/);
-
-				// Remove the command which is the first index
-				arguments.shift();
-
-				// Ensure we have the correct number of arguments
+				const args = content.split(/[ ]+/);
+				args.shift();
 				if (
-					arguments.length < minArgs ||
-          (maxArgs !== null && arguments.length > maxArgs)
+					args.length < minArgs ||
+          (maxArgs !== null && args.length > maxArgs)
 				) {
 					message.reply(
 						`Incorrect syntax! Use ${prefix}${alias} ${expectedArgs}`,
@@ -125,10 +116,33 @@ module.exports = (client, commandOptions) => {
 				}
 
 				// Handle the custom command code
-				callback(message, arguments, arguments.join(' '), client);
+				callback(message, args, args.join(' '), client);
 
 				return;
 			}
+		}
+	});
+};
+
+
+module.exports.updateCache = (guildId, newPrefix) => {
+	guildPrefixes[guildId] = newPrefix;
+};
+
+module.exports.loadPrefixes = async (client) => {
+	await mongo().then(async (mongoose) => {
+		try {
+			for (const guild of client.guilds.cache) {
+				const guildId = guild[1].id;
+
+				const result = await commandPrefixSchema.findOne({ _id: guildId });
+				guildPrefixes[guildId] = result ? result.prefix : globalPrefix;
+			}
+
+			console.log(guildPrefixes);
+		}
+		finally {
+			mongoose.connection.close();
 		}
 	});
 };

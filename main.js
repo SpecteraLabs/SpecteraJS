@@ -1,18 +1,34 @@
+const path = require('path');
+const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client({
-	intents: ['GUILDS', 'GUILD_BANS', 'GUILD_EMOJIS', 'GUILD_MEMBERS', 'GUILD_MESSAGES'],
-	partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER'],
+	partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],
+	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILD_MEMBERS', 'GUILD_PRESENCES', 'DIRECT_MESSAGES', 'DIRECT_MESSAGE_TYPING', 'GUILD_BANS', 'GUILD_WEBHOOKS'],
 });
-const { prefix, token } = require('./config.json');
+
+const config = require('./config.json');
 
 client.on('ready', async () => {
-	console.log(`${client.user.tag} is logged in!`);
+	console.log('The client is ready!');
+
+	const baseFile = 'command-base.js';
+	const commandBase = require(`./commands/${baseFile}`);
+
+	const readCommands = (dir) => {
+		const files = fs.readdirSync(path.join(__dirname, dir));
+		for (const file of files) {
+			const stat = fs.lstatSync(path.join(__dirname, dir, file));
+			if (stat.isDirectory()) {
+				readCommands(path.join(dir, file));
+			}
+			else if (file !== baseFile) {
+				const option = require(path.join(__dirname, dir, file));
+				commandBase(client, option);
+			}
+		}
+	};
+
+	readCommands('commands');
 });
 
-client.on('message', async (message) => {
-	const args = message.content.slice(prefix.length).trim().split(' ');
-	const command = args.shift().toLowerCase();
-	if (!message.content.toLowerCase().startsWith(prefix)) return;
-	command;
-});
-client.login(token);
+client.login(config.token);
