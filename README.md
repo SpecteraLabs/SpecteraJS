@@ -1,0 +1,3 @@
+# Obligator
+
+Bot by UndiedGFX
