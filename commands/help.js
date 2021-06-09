@@ -42,7 +42,7 @@ module.exports = {
 			const args = command.expectedArgs ? ` ${command.expectedArgs}` : '';
 			const { description } = command;
 
-			reply += `**${prefix}${mainCommand}${args}** = ${description}\n`;
+			reply += `**${mainCommand}${args}** = ${description}\n`;
 		}
 
 		message.channel.send(reply);
