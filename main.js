@@ -7,7 +7,7 @@ const client = new Discord.Client({
 	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILD_MEMBERS', 'GUILD_PRESENCES', 'DIRECT_MESSAGES', 'DIRECT_MESSAGE_TYPING', 'GUILD_BANS', 'GUILD_WEBHOOKS'],
 });
 
-const config = require('./config.json');
+const confi = require('./confi.json');
 
 client.on('ready', async () => {
 	console.log('The client is ready!');
@@ -34,4 +34,4 @@ client.on('ready', async () => {
 	client.user.setActivity(`${client.guilds.cache.size} servers | +help`, { type: "COMPETING" });
 });
 
-client.login(config.token);
+client.login(confi.token);
