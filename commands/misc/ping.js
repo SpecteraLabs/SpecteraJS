@@ -2,6 +2,6 @@
 module.exports = {
 	commands: ['ping', 'latency'],
 	callback: (message, args, text, client) => {
-		message.reply(`🏓Latency is **${Date.now() - message.createdTimestamp}**ms`);
+		message.reply(`🏓Latency is **${Math.round(client.ws.ping)}**ms`);
 	},
 };
