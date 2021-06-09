@@ -6,6 +6,7 @@ const commandBase = require('../command-base');
 
 module.exports = {
 	commands: 'setprefix',
+	description: 'Changes bot\'s command for the server',
 	minArgs: 1,
 	maxArgs: 3,
 	expectedArgs: '<This bot\'s new command prefix>',
