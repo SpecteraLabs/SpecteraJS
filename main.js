@@ -29,6 +29,7 @@ client.on('ready', async () => {
 	};
 
 	readCommands('commands');
+	commandBase.loadPrefixes(client);
 });
 
 client.login(config.token);
