@@ -11,7 +11,7 @@ module.exports = {
 	expectedArgs: '<This bot\'s new command prefix>',
 	permissionError: 'You must be an admin to run this command.',
 	permissions: 'ADMINISTRATOR',
-	callback: async (message, args, text) => {
+	callback: async (message, args, text, client) => {
 		await mongo().then(async (mongoose) => {
 			try {
 				const guildId = message.guild.id;
@@ -31,8 +31,9 @@ module.exports = {
 				);
 
 				message.reply(`The prefix for this bot is now ${prefix}`);
+				message.guild.me.setNickname(`[${prefix}] Obligator`);
+				message.channel.send(`I changed my nickname to [${prefix}] Obligator so that you can remember my prefix`);
 
-				// Update the cache
 				commandBase.updateCache(guildId, prefix);
 			}
 			finally {

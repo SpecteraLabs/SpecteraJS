@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const path = require('path');
 const fs = require('fs');
 const Discord = require('discord.js');
@@ -30,6 +31,7 @@ client.on('ready', async () => {
 
 	readCommands('commands');
 	commandBase.loadPrefixes(client);
+	client.user.setActivity(`${client.guilds.cache.size} servers | +help`, { type: "COMPETING" });
 });
 
 client.login(config.token);
