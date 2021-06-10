@@ -34,6 +34,7 @@ module.exports = {
 			const wEmbed = new MessageEmbed()
 				.setTitle('Warn')
 				.setDescription('\`\`\`yaml\n #Warns a user \n Usage: +warn <target(Must Mention)> <reason>\`\`\`');
+			message.reply({ embed: wEmbed, allowedMentions: { repliedUser: false } });
 		}
 	},
 };
