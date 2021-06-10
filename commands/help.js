@@ -1,50 +1,22 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-shadow-restricted-names */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-mixed-spaces-and-tabs */
-const { prefix } = require('../config.json');
 const loadCommands = require('../load-commands');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
 	commands: ['help', 'h'],
 	description: "Describes all of this bot's commands",
-	callback: (message, arguments, text) => {
-		let reply = 'I am the obligator bot, here are my supported commands:\n\n';
-
-		const commands = loadCommands();
-
-		for (const command of commands) {
-
-			let permissions = command.permission;
-
-			if (permissions) {
-				let hasPermission = true;
-				if (typeof permissions === 'string') {
-					permissions = [permissions];
-				}
-
-				for (const permission of permissions) {
-					if (!message.member.hasPermission(permission)) {
-						hasPermission = false;
-						break;
-					}
-				}
-
-				if (!hasPermission) {
-					continue;
-				}
-			}
-
-			// Format the text
-			const mainCommand =
-        typeof command.commands === 'string'
-        	? command.commands
-        	: command.commands[0];
-			const args = command.expectedArgs ? ` ${command.expectedArgs}` : '';
-			const { description } = command;
-
-			reply += `**${mainCommand}${args}** = ${description}\n`;
+	callback: (message, args, text) => {
+		if (!args.length) {
+			const halpembed = new MessageEmbed()
+				.setTitle('Help command')
+				.addField('Prefix', '\`setprefix\`')
+				.addField('Misc', '\`ping\` \`latency\` \`runtime\`')
+				.setColor('#000000')
+				.setTimestamp();
+			message.reply({ embed : halpembed });
 		}
-
-		message.channel.send(reply);
 	},
 };
