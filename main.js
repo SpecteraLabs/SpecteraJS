@@ -9,6 +9,7 @@ const client = new Discord.Client({
 
 const config = require('./config.json');
 const loadCommands = require('./load-commands');
+const { setInterval } = require('timers');
 
 client.on('ready', async () => {
 	console.log('The client is ready!');
@@ -18,6 +19,11 @@ client.on('ready', async () => {
 
 	loadCommands(client);
 	commandBase.loadPrefixes(client);
+	const activities = [`${client.guilds.cache.size} servers`, '+help for list of commands', 'Join https://discord.gg/WaqYbeFQUb for support'];
+	setInterval(function() {
+		const randAact = activities[Math.floor(Math.random() * activities.length)];
+		client.user.setActivity(randAact, { type: "COMPETING" });
+	}, 2000);
 });
 
 client.login(config.token);
