@@ -14,7 +14,7 @@ module.exports = {
 				.setTitle('Help command')
 				.addField('Prefix', '\`setprefix\`')
 				.addField('Misc', '\`ping\` \`latency\` \`runtime\`')
-				.setColor('#000000')
+				.setColor('#FFFFFF')
 				.setTimestamp();
 			message.reply({ embed : halpembed });
 		}
