@@ -19,7 +19,7 @@ module.exports = {
 				.setTimestamp();
 			message.reply({ embed : halpembed });
 		}
-		else if (args[0].toLowerCase() === 'ping' || args[0].toLowercase() === 'latency' || args[0].toLowerCase() === 'runtime') {
+		else if (args[0].toLowerCase() === 'ping' || args[0].toLowerCase() === 'latency' || args[0].toLowerCase() === 'runtime') {
 			const Lembed = new MessageEmbed()
 				.setTitle('Ping | Latency | Runtime')
 				.setDescription(`\`\`\`yaml\n #Shows bot latency \n Usage: +ping\`\`\``)
