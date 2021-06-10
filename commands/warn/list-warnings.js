@@ -8,7 +8,7 @@ module.exports = {
 	minArgs: 1,
 	expectedArgs: "<Target user's @>",
 	permissions: 'KICK_MEMBERS',
-	permissionError: 'You must have kick permissions to run this command',
+	permissionError: 'You must have `Kick Members` Permission(s) to run this command',
 	callback: async (message, args, text) => {
 		const target = message.mentions.users.first();
 		if (!target) {
@@ -32,14 +32,16 @@ module.exports = {
 				for (const warning of results.warnings) {
 					const { author, timestamp, reason } = warning;
 					x += 1;
-					reply += `Warning number : ${x}\nResponsible Moderator:\n ${author}\n Date:\n ${new Date(
+					reply += `**Warning number:** ${x}\n**Responsible Moderator:** ${author}\n **Date:** ${new Date(
 						timestamp,
-					).toLocaleDateString()}\n Reason: "${reason}"\n\n`;
+					).toLocaleDateString()}\n **Reason:** "${reason}"\n\n`;
 					i += 1;
 				}
 				const hmm = new Discord.MessageEmbed()
+					.setColor('#fc030b')
 					.setTitle(`${target.tag}'s warnings`)
-					.setDescription(`Warnings : ${i}\n ${reply}`)
+					.setDescription(`**__Warnings__** : ${i}\n ${reply}`)
+					.setFooter(`Requested by ${message.channel.author}`)
 					.setTimestamp();
 				message.reply({ embed: hmm });
 			}
