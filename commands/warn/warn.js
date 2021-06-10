@@ -1,6 +1,5 @@
 const mongo = require('../../mongo');
 const warnSchema = require('../../schemas/warn-schema');
-
 module.exports = {
 	commands: 'warn',
 	minArgs: 2,
@@ -44,6 +43,7 @@ module.exports = {
 						upsert: true,
 					},
 				);
+				message.channel.send(`${target.tag} has been warned for reason ${reason}`);
 			}
 			finally {
 				mongoose.connection.close();
