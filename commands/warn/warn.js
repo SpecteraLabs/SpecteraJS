@@ -5,7 +5,7 @@ module.exports = {
 	minArgs: 2,
 	expectedArgs: "<Target user's @> <reason>",
 	permissions: 'KICK_MEMBERS',
-	permissionError: 'You must have kick permissions to run this command',
+	permissionError: 'You must have `Kick Members` Permission(s) to run this command',
 	callback: async (message, args) => {
 		const target = message.mentions.users.first();
 		if (!target) {
@@ -43,7 +43,7 @@ module.exports = {
 						upsert: true,
 					},
 				);
-				message.channel.send(`${target.tag} has been warned for reason ${reason}`);
+				message.channel.send(`${target.tag} has been warned successfully\n**Reason:** ${reason}`);
 			}
 			finally {
 				mongoose.connection.close();
