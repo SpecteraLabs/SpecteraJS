@@ -16,6 +16,7 @@ module.exports = {
 				.addFields(
 					{ name: "Prefix", value: "`setprefix`" },
 					{ name: "Misc", value: "\`ping\` \`latency\` \`runtime\`" },
+					{ name : "Moderation", value: "\`warn\` \`clearwarn\` \`listwarns\`" },
 				)
 				.setColor('#FFFFFF')
 				.setTimestamp();
@@ -24,10 +25,15 @@ module.exports = {
 		else if (args[0].toLowerCase() === 'ping' || args[0].toLowerCase() === 'latency' || args[0].toLowerCase() === 'runtime') {
 			const Lembed = new MessageEmbed()
 				.setTitle('Ping | Latency | Runtime')
-				.setDescription(`\`\`\`yaml\n #Shows bot latency \n Usage: +ping\`\`\``)
+				.setDescription(`\`\`\`yaml\n #Shows bot latency \n Usage: +ping or +latency or +runtime\`\`\``)
 				.setColor('#FFFFFF')
 				.setTimestamp();
 			message.reply({ embed: Lembed, allowedMentions: { repliedUser: false } });
+		}
+		else if (args[0].toLowerCase() === 'warn') {
+			const wEmbed = new MessageEmbed()
+				.setTitle('Warn')
+				.setDescription('\`\`\`yaml\n #Warns a user \n Usage: +warn <target(Must Mention)> <reason>\`\`\`');
 		}
 	},
 };

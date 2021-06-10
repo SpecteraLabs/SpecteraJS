@@ -4,7 +4,7 @@ const warnSchema = require('../../schemas/warn-schema');
 const Discord = require('discord.js');
 
 module.exports = {
-	commands: ['listwarnings', 'lw'],
+	commands: ['listwarnings', 'lw', 'listwarns'],
 	minArgs: 1,
 	expectedArgs: "<Target user's @>",
 	permissions: 'KICK_MEMBERS',
