@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const mongo = require('../../mongo');
 const warnSchema = require('../../schemas/warn-schema');
+const Discord = require('discord.js');
 
 module.exports = {
 	commands: ['listwarnings', 'lw'],
@@ -26,16 +27,21 @@ module.exports = {
 				});
 
 				let reply = ``;
-
+				let i = 0;
+				let x = 0;
 				for (const warning of results.warnings) {
 					const { author, timestamp, reason } = warning;
-
-					reply += `By ${author} on ${new Date(
+					x += 1;
+					reply += `Warning number : ${x}\nResponsible Moderator:\n ${author}\n Date:\n ${new Date(
 						timestamp,
-					).toLocaleDateString()} for "${reason}"\n\n`;
+					).toLocaleDateString()}\n Reason: "${reason}"\n\n`;
+					i += 1;
 				}
-
-				message.reply(reply);
+				const hmm = new Discord.MessageEmbed()
+					.setTitle(`${target.tag}'s warnings`)
+					.setDescription(`Warnings : ${i}\n ${reply}`)
+					.setTimestamp();
+				message.reply({ embed: hmm });
 			}
 			finally {
 				mongoose.connection.close();
