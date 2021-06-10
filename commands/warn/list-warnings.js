@@ -25,25 +25,29 @@ module.exports = {
 					guildId,
 					userId,
 				});
-
-				let reply = ``;
-				let i = 0;
-				let x = 0;
-				for (const warning of results.warnings) {
-					const { author, timestamp, reason } = warning;
-					x += 1;
-					reply += `**Warning number:** ${x}\n**Responsible Moderator:** ${author}\n **Date:** ${new Date(
-						timestamp,
-					).toLocaleDateString()}\n **Reason:** "${reason}"\n\n`;
-					i += 1;
+				if (results) {
+					let reply = ``;
+					let i = 0;
+					let x = 0;
+					for (const warning of results.warnings) {
+						const { author, timestamp, reason } = warning;
+						x += 1;
+						reply += `**Warning number:** ${x}\n**Responsible Moderator:** ${author}\n **Date:** ${new Date(
+							timestamp,
+						).toLocaleDateString()}\n **Reason:** "${reason}"\n\n`;
+						i += 1;
+					}
+					const hmm = new Discord.MessageEmbed()
+						.setColor('#fc030b')
+						.setTitle(`${target.tag}'s warnings`)
+						.setDescription(`**__Warnings__** : ${i}\n ${reply}`)
+						.setFooter(`Requested by ${message.channel.author}`)
+						.setTimestamp();
+					message.reply({ embed: hmm });
 				}
-				const hmm = new Discord.MessageEmbed()
-					.setColor('#fc030b')
-					.setTitle(`${target.tag}'s warnings`)
-					.setDescription(`**__Warnings__** : ${i}\n ${reply}`)
-					.setFooter(`Requested by ${message.channel.author}`)
-					.setTimestamp();
-				message.reply({ embed: hmm });
+				else {
+					message.reply(`No warnings found for ${target.tag}`, { allowedMentions: { repliedUser: false } });
+				}
 			}
 			finally {
 				mongoose.connection.close();
