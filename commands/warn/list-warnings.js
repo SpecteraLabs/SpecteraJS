@@ -41,7 +41,7 @@ module.exports = {
 						.setColor('#fc030b')
 						.setTitle(`${target.tag}'s warnings`)
 						.setDescription(`**__Warnings__** : ${i}\n ${reply}`)
-						.setFooter(`Requested by ${message.channel.author}`)
+						.setFooter(`Requested by ${message.author.tag}`)
 						.setTimestamp();
 					message.reply({ embed: hmm });
 				}
