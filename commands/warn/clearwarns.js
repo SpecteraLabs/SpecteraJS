@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const mongo = require('../../mongo');
 const warnSchema = require('../../schemas/warn-schema');
+const MessageEmbed = require('discord.js').MessageEmbed;
 
 module.exports = {
 	commands: ['cwarn', 'clearwarn', 'cw'],
@@ -30,10 +31,20 @@ module.exports = {
 						userId,
 						guildId,
 					});
-					message.channel.send(`Cleared ${target.tag}'s warnings `);
+					const successEmbed = new MessageEmbed()
+						.setTitle('<a:SuccessTicko:853277905025892382> Done')
+						.setDescription(`Successfully cleared warnings of ${target.tag}`)
+						.setColor('#FFFFFF')
+						.setTimestamp();
+					message.channel.send({ embed : successEmbed, allowedMentions: { repliedUser: false } });
 				}
 				else {
-					message.channel.send('I could not find any warnings for ' + target.tag);
+					const errorEmbed = new MessageEmbed()
+						.setTitle('<a:ErrorTicko:853278103794089985> Error')
+						.setDescription(`I couldn't find any warnings for ${target.tag} `)
+						.setColor('RED')
+						.setTimestamp();
+					message.channel.send({ embed : errorEmbed, allowedMentions: { repliedUser: false } });
 				}
 			});
 		});
