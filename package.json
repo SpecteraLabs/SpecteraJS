@@ -5,7 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "@discordjs/voice": "^0.3.0",
-    "discord.js": "^13.0.0-dev.fbcbb29884a35308a7af2169f5f9ae5658c458e8",
+    "discord.js": "^13.0.0-dev.02693bc02f45980d8165820a103220f0027b96b7",
     "mongoose": "^5.12.13",
     "timers": "^0.1.1"
   },
