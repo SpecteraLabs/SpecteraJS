@@ -3,7 +3,6 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
 	commands: ['ban'],
 	minArgs: 2,
-	maxArgs: 100,
 	permissions: 'BAN_MEMBERS',
 	permissionError: 'You do not have permissions to ban members!',
 	callback: (message, args, text, client) => {

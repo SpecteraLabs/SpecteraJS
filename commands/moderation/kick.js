@@ -3,7 +3,6 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
 	commands: ['kick'],
 	minArgs: 2,
-	maxArgs: 100,
 	permissions: 'KICK_MEMBERS',
 	permissionError: 'You do not have permissions to kick members!',
 	callback: (message, args, text, client) => {
