@@ -1,22 +1,22 @@
 /* eslint-disable no-unused-vars */
 const { MessageEmbed } = require('discord.js');
 module.exports = {
-	commands: ['kick'],
+	commands: ['ban'],
 	minArgs: 2,
 	maxArgs: 100,
-	permissions: 'KICK_MEMBERS',
-	permissionError: 'You do not have permissions to kick members!',
+	permissions: 'BAN_MEMBERS',
+	permissionError: 'You do not have permissions to ban members!',
 	callback: (message, args, text, client) => {
 		const reason = args.join(' ').slice(22);
 		const succEmbed = new MessageEmbed()
 			.setTitle('<a:SuccessTicko:853277905025892382> Success')
 			.setTimestamp()
 			.setColor('GREEN')
-			.setDescription(`Successfully kicked **${message.mentions.members.first()}**!`)
-			.setFooter(`Kicked by ${message.author.tag}`, message.author.displayAvatarURL());
+			.setDescription(`Successfully banned **${message.mentions.members.first()}**!`)
+			.setFooter(`Banned by ${message.author.tag}`, message.author.displayAvatarURL());
 		if (message.mentions.members.first()) {
 			try {
-				message.mentions.members.first().kick(reason);
+				message.mentions.members.first().ban({ reason: reason });
 				client.setTimeout(() => message.delete(), 10);
 				message.reply({ embeds : [succEmbed], allowedMentions: { repliedUser: false } })
 					.then(msg => {
@@ -24,14 +24,14 @@ module.exports = {
 					});
 			}
 			catch {
-				message.reply(`I do not have permissions to kick **${message.mentions.members.first()}**`);
+				message.reply(`I do not have permissions to ban **${message.mentions.members.first()}**`);
 			}
 		}
 		else if (!reason) {
 			message.reply('You have to specify a reason to ban!');
 		}
 		else {
-			message.reply('You have to mention a user to kick');
+			message.reply('You have to mention a user to ban');
 		}
 	},
 };
