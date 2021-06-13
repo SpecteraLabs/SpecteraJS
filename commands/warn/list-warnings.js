@@ -43,7 +43,7 @@ module.exports = {
 						.setDescription(`**__Warnings__** : ${i}\n ${reply}`)
 						.setFooter(`Requested by ${message.author.tag}`)
 						.setTimestamp();
-					message.reply({ embed: hmm });
+					message.reply({ embeds: [hmm] });
 				}
 				else {
 					message.reply(`No warnings found for ${target.tag}`, { allowedMentions: { repliedUser: false } });

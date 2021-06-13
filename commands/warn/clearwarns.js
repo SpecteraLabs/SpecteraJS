@@ -36,7 +36,7 @@ module.exports = {
 						.setDescription(`Successfully cleared warnings of ${target.tag}`)
 						.setColor('#FFFFFF')
 						.setTimestamp();
-					message.channel.send({ embed : successEmbed, allowedMentions: { repliedUser: false } });
+					message.channel.send({ embeds : [ successEmbed ], allowedMentions: { repliedUser: false } });
 				}
 				else {
 					const errorEmbed = new MessageEmbed()
@@ -44,7 +44,7 @@ module.exports = {
 						.setDescription(`I couldn't find any warnings for ${target.tag} `)
 						.setColor('RED')
 						.setTimestamp();
-					message.channel.send({ embed : errorEmbed, allowedMentions: { repliedUser: false } });
+					message.channel.send({ embeds : [errorEmbed], allowedMentions: { repliedUser: false } });
 				}
 			});
 		});
