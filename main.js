@@ -11,7 +11,7 @@ const config = require('./config.json');
 const loadCommands = require('./load-commands');
 
 client.on('ready', async () => {
-	console.log('The client is ready!');
+	console.log(`${client.user.tag} is now up to server some servers!`);
 
 	const baseFile = 'command-base.js';
 	const commandBase = require(`./commands/${baseFile}`);
@@ -23,7 +23,7 @@ client.on('ready', async () => {
 		const randAact = activities[Math.floor(Math.random() * activities.length)];
 		client.user.setActivity(randAact, { type: "WATCHING" });
 	}, 2800);
-	console.log(` I am now in ${client.guilds.cache.size} servers`);
+	console.log(`I am now in ${client.guilds.cache.size} servers`);
 });
 client.on('guildCreate', async (guild) => {
 	guild.me.setNickname('[+] Obligator');
