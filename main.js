@@ -24,5 +24,8 @@ client.on('ready', async () => {
 		client.user.setActivity(randAact, { type: "WATCHING" });
 	}, 2800);
 });
+client.on('guildCreate', async (guild) => {
+	guild.me.setNickname('[+] Obligator');
+});
 
 client.login(config.token);
