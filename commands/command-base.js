@@ -109,9 +109,9 @@ module.exports = (client, commandOptions) => {
 				if (cooldown > 0 && recentlyRan.includes(cooldownString)) {
 					const currentTime = Date.now();
 					const cda = cooldown * 1000;
-					const exp = currentTime - cooldown + cda;
+					const exp = currentTime + cda;
 					const rntime = (exp - currentTime) / 1000;
-					message.reply(`Pls wait ${rntime.toFixed(1)}s till you use the command again`);
+					message.reply(`Pls wait ${rntime.toFixed()}s till you use the command again`);
 					return;
 				}
 
