@@ -11,6 +11,7 @@ module.exports = {
 	description: "Describes all of this bot's commands",
 	minArgs: 0,
 	maxArgs: 2,
+	cooldown: 20,
 	callback: (message, args, text) => {
 		if (!args.length) {
 			const halpembed = new MessageEmbed()
@@ -22,7 +23,7 @@ module.exports = {
 				)
 				.setColor('#FFFFFF')
 				.setTimestamp();
-			message.reply({ embed : halpembed });
+			message.reply({ embeds : [halpembed] });
 		}
 		else if (args[0].toLowerCase() === 'ping' || args[0].toLowerCase() === 'latency' || args[0].toLowerCase() === 'runtime') {
 			const Lembed = new MessageEmbed()
@@ -30,7 +31,7 @@ module.exports = {
 				.setDescription(`\`\`\`yaml\n #Shows bot latency \n Usage: +ping or +latency or +runtime\`\`\``)
 				.setColor('#FFFFFF')
 				.setTimestamp();
-			message.reply({ embed: Lembed, allowedMentions: { repliedUser: false } });
+			message.reply({ embeds: [Lembed], allowedMentions: { repliedUser: false } });
 		}
 		else if (args[0].toLowerCase() === 'warn') {
 			const wEmbed = new MessageEmbed()
@@ -38,7 +39,7 @@ module.exports = {
 				.setColor('#FFFFFF')
 				.setTimestamp()
 				.setDescription('\`\`\`yaml\n #Warns a user \n Usage: +warn <target(Must Mention)> <reason>\`\`\`');
-			message.reply({ embed: wEmbed, allowedMentions: { repliedUser: false } });
+			message.reply({ embeds: [wEmbed], allowedMentions: { repliedUser: false } });
 		}
 		else if (args[0].toLowerCase() === 'lw' || args[0].toLowerCase() === 'listwarnings' || args[0].toLowerCase() === 'listwarns') {
 			const waEmbed = new MessageEmbed()
@@ -46,7 +47,7 @@ module.exports = {
 				.setDescription('\`\`\`yaml\n #Lists warnings of a user \n Usage : +listwarns <target(Must Mention)> \`\`\`')
 				.setColor('#FFFFFF')
 				.setTimestamp();
-			message.reply({ embed: waEmbed, allowedMentions: { repliedUser: false } });
+			message.reply({ embeds: [waEmbed], allowedMentions: { repliedUser: false } });
 		}
 		else if (args[0].toLowerCase() === 'cw' || args[0].toLowerCase() === 'clearwarn' || args[0].toLowerCase() === 'cwarn') {
 			const cembed = new MessageEmbed()
@@ -54,7 +55,7 @@ module.exports = {
 				.setDescription('\`\`\`yaml\n #Clears all warnings of a user \n Usage : +clearwarn <target(Must Mention)>\`\`\`')
 				.setColor('#FFFFFF')
 				.setTimestamp();
-			message.reply({ embed: cembed, allowedMentions: { repliedUser: false } });
+			message.reply({ embeds: [cembed], allowedMentions: { repliedUser: false } });
 		}
 	},
 };
