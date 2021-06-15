@@ -111,7 +111,7 @@ module.exports = (client, commandOptions) => {
 					const cda = cooldown * 1000;
 					const exp = currentTime + cda;
 					const rntime = (exp - currentTime) / 1000;
-					message.reply(`Pls wait ${rntime.toFixed()}s till you use the command again`);
+					message.reply(`Woah a little too quick there buddy! (the cooldown of this command is ${rntime})`);
 					return;
 				}
 
