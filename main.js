@@ -23,9 +23,15 @@ client.on('ready', async () => {
 		const randAact = activities[Math.floor(Math.random() * activities.length)];
 		client.user.setActivity(randAact, { type: "WATCHING" });
 	}, 2800);
+	console.log(` I am now in ${client.guilds.cache.size} servers`);
 });
 client.on('guildCreate', async (guild) => {
 	guild.me.setNickname('[+] Obligator');
+	const activities = [`${client.guilds.cache.size} servers`, '+help for list of commands', 'Join https://discord.gg/WaqYbeFQUb for support'];
+	setInterval(function() {
+		const randAact = activities[Math.floor(Math.random() * activities.length)];
+		client.user.setActivity(randAact, { type: "WATCHING" });
+	}, 2800);
 });
 
 client.login(config.token);
