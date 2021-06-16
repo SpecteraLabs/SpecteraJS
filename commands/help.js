@@ -19,7 +19,7 @@ module.exports = {
 				.addFields(
 					{ name: "Prefix", value: "`setprefix`" },
 					{ name: "Misc", value: "\`ping\` \`latency\` \`runtime\`" },
-					{ name : "Moderation", value: "\`warn\` \`clearwarn\` \`listwarns\`" },
+					{ name : "Moderation", value: "\`warn\` \`clearwarn\` \`listwarns\` \`mute\` \`kick\` \`ban\`" },
 				)
 				.setColor('#FFFFFF')
 				.setTimestamp();
