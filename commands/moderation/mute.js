@@ -33,7 +33,6 @@ module.exports = {
 				}
 				catch(err) {
 					console.log('array error');
-					message.channel.send('An error occoured while getting the channels.');
 					console.log(err);
 				}
 			}
@@ -42,7 +41,7 @@ module.exports = {
 		}
 		message.delete();
 		mutedPerson.roles.add(muterole);
-		message.channel.send(`Alright successfully muted ${mutedPerson.user.tag}`).then((msg) => {
+		message.channel.send(`Alright successfully muted **${mutedPerson.user.tag}**`).then((msg) => {
 			client.setTimeout(() => msg.delete(), 3000);
 		});
 	},
