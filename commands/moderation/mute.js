@@ -1,3 +1,4 @@
+/* eslint-disable no-inner-declarations */
 /* eslint-disable no-unused-vars */
 module.exports = {
 	commands: ['mute'],
@@ -17,11 +18,32 @@ module.exports = {
 				color: '#696969',
 				reason: 'This server needed a MuteRole',
 			});
+			var array = [];
+			function getChannelIDs(fetch) {
+				const mutrole = message.guild.roles.cache.find(r => r.name === 'Muted');
+				try{
+					let channels = message.guild.channels.cache.array();
+					for (const channel of channels) {
+						array.push(channel.id);
+						channel.createOverwrite(mutrole, {
+							SEND_MESSAGES: false,
+							ADD_REACTIONS: false,
+						});
+					}
+				}
+				catch(err) {
+					console.log('array error');
+					message.channel.send('An error occoured while getting the channels.');
+					console.log(err);
+				}
+				return array;
+			}
+			getChannelIDs();
 			message.channel.send(`Created a muterole for this server, now you can use that role to mute people`);
 		}
 		message.delete();
 		mutedPerson.roles.add(muterole);
-		message.channel.send(`Alright successfully muted ${mutedPerson.tag}`).then((msg) => {
+		message.channel.send(`Alright successfully muted ${mutedPerson.user.tag}`).then((msg) => {
 			client.setTimeout(() => msg.delete(), 3000);
 		});
 	},
