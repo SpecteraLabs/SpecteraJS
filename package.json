@@ -5,6 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "discord.js": "^13.0.0-dev.a3cbcca13da1af416c219bd64a0a6e84bb87a057",
+    "lavalink": "^2.11.0",
     "mongoose": "^5.12.13",
     "timers": "^0.1.1"
   },
