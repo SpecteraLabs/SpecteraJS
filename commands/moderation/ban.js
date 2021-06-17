@@ -10,7 +10,7 @@ module.exports = {
 		const succEmbed = new MessageEmbed()
 			.setTitle('<a:SuccessTicko:853277905025892382> Success')
 			.setTimestamp()
-			.setColor('GREEN')
+			.setColor('#44CF6C')
 			.setDescription(`Successfully banned **${message.mentions.members.first()}**!`)
 			.setFooter(`Banned by ${message.author.tag}`, message.author.displayAvatarURL());
 		if (message.mentions.members.first()) {

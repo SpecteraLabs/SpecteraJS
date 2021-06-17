@@ -38,7 +38,7 @@ module.exports = {
 						i += 1;
 					}
 					const hmm = new Discord.MessageEmbed()
-						.setColor('#fc030b')
+						.setColor('#EA2B1F')
 						.setTitle(`${target.tag}'s warnings`)
 						.setDescription(`**__Warnings__** : ${i}\n ${reply}`)
 						.setFooter(`Requested by ${message.author.tag}`)
