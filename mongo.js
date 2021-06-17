@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoPath = 
+const mongoPath = ""
 
 module.exports = async () => {
 	await mongoose.connect(mongoPath, {
