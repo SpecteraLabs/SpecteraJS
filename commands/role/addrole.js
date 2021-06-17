@@ -10,7 +10,13 @@ module.exports = {
 		if (!target && !args[0]) return message.reply('You need to either tag or specify id or specify tag of a user!');
 		if (!args[1]) return message.reply('You need to specify a role!');
 		if (!trole) return message.reply('Could not find that role!');
-		target.roles.add(trole);
-		message.reply(`Alright added role **${trole.name}** to **${target.user.tag}**`);
+		if (target.user.roles.cache.has(trole)) return message.reply(`Cannot add role to **${target.user.tag}** because they alreadt have it`);
+		try {
+			target.roles.add(trole);
+			message.reply(`Alright added role **${trole.name}** to **${target.user.tag}**`);
+		}
+		catch {
+			message.reply(`I could not add **${trole.name}** to **${target.user.tag}**`);
+		}
 	},
 };
