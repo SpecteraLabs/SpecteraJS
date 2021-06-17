@@ -4,7 +4,7 @@ module.exports = {
 	minArgs: 1,
 	permissions: 'MANAGE_ROLES',
 	callback: async (message, args, text, client) => {
-		const target = message.mentions.members.first();
+		const target = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.displayName === args[0]) || message.guild.members.cache.find(r => r.user.tag === args[0]);
 		const muterole = message.guild.roles.cache.find(r => r.name === 'Muted');
 		if (target.roles.cache.find(r => r.name === 'Muted')) {
 			target.roles.remove(muterole);

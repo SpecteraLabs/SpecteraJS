@@ -6,7 +6,7 @@ module.exports = {
 	permissionError: 'You cannot mute people!',
 	minArgs: 1,
 	callback: async (message, args, text, client) => {
-		const mutedPerson = message.mentions.members.first();
+		const mutedPerson = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.displayName === args[0]) || message.guild.members.cache.find(r => r.user.tag === args[0]);
 		if (!mutedPerson) {
 			message.reply('You have to tag someone to mute!');
 		}
