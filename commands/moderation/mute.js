@@ -12,7 +12,9 @@ module.exports = {
 		}
 		let muterole = message.guild.roles.cache.find(r => r.name === 'Muted');
 		if (!muterole) {
-			message.reply('No muterole found for this server!');
+			message.reply('No muterole found for this server!').then((ms) => {
+				client.setTimeout(() => ms.edit(`Created a muterole for this server, now you can use that role to mute people`), 1000);
+			});
 			muterole = await message.guild.roles.create({
 				name: 'Muted',
 				color: '#696969',
@@ -37,7 +39,6 @@ module.exports = {
 				}
 			}
 			getChannelIDs();
-			message.channel.send(`Created a muterole for this server, now you can use that role to mute people`);
 		}
 		message.delete();
 		mutedPerson.roles.add(muterole);
