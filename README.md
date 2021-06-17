@@ -1,3 +1,13 @@
 # Obligator
 
-A general purpose bot which is in beta by @UndiedGamer collaborating with @1ollipop
+A general purpose bot which is being developed and on open source
+
+# Features
+* Music (Soon)
+* Moderation 
+* Custom server prefix and warns system
+
+# Modules Used
+* Discord.js
+* Lavalink (Soon)
+* Mongoose
