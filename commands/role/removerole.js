@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
-	commands: ['addrole', 'arole'],
+	commands: ['removerole', 'rrole'],
 	minArgs: 2,
 	permissions: 'MANAGE_ROLES',
 	permissionError: 'You do not have permission to run this command',
@@ -10,13 +10,13 @@ module.exports = {
 		if (!target && !args[0]) return message.reply('You need to either tag or specify id or specify tag of a user!');
 		if (!args[1]) return message.reply('You need to specify a role!');
 		if (!trole) return message.reply('Could not find that role!');
-		if (target.roles.cache.some(r => r.name === trole.name)) return message.reply(`Cannot add role to **${target.user.tag}** because they already have it`);
+		if (!target.roles.cache.some(r => r.name === trole.name)) return message.reply(`Cannot remove role from **${target.user.tag}** because they don't even have it`);
 		try {
-			target.roles.add(trole);
-			message.reply(`Alright added role **${trole.name}** to **${target.user.tag}**`);
+			target.roles.remove(trole);
+			message.reply(`Alright removed role **${trole.name}** from **${target.user.tag}**`);
 		}
 		catch {
-			message.reply(`I could not add **${trole.name}** to **${target.user.tag}**`);
+			message.reply(`I could not remove **${trole.name}** from **${target.user.tag}**`);
 		}
 	},
 };
