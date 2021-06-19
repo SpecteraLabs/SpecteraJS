@@ -5,7 +5,7 @@ module.exports = {
 	minArgs: 2,
 	permissions: 'KICK_MEMBERS',
 	permissionError: 'You do not have permissions to kick members!',
-	callback: (message, args, text, client) => {
+	callback: async (message, args, text, client) => {
 		const reason = args.join(' ').slice(22);
 		const target = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.displayName === args[0]) || message.guild.members.cache.find(r => r.user.tag === args[0]);
 		const succEmbed = new MessageEmbed()
