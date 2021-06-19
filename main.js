@@ -10,6 +10,15 @@ const client = new Discord.Client({
 const config = require('./config.json');
 const loadCommands = require('./load-commands');
 
+client.on('guildUpdate', async (oldGuild, newGuild) => {
+	const channela = newGuild.channels.cache.find(ch => !oldGuild.channles.cache.has(ch.id));
+	const muterole = newGuild.roles.cache.find(r => r.name === 'Muted');
+	await channela.createOverwrite(muterole, {
+		SEND_MESSAGES: false,
+		CONNECT: false,
+		ADD_REACTIONS: false,
+	});
+});
 client.on('ready', async () => {
 	console.log(`${client.user.tag} is now up to server some servers!`);
 
