@@ -17,7 +17,7 @@ module.exports = {
 				.setTitle('Help')
 				.addFields(
 					{ name: "Prefix", value: "`setprefix`" },
-					{ name: "Misc", value: "\`ping\` \`docs\ \`v13docs\`" },
+					{ name: "Misc", value: "\`ping\` \`docs\` \`v13docs\`" },
 					{ name: "Moderation", value: "\`warn\` \`clearwarn\` \`listwarns\` \`mute\` \`kick\` \`ban\`" },
 				)
 				.setColor('#FFFFFF')
