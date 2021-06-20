@@ -160,8 +160,6 @@ module.exports.loadPrefixes = async (client) => {
 				guildPrefixes[guildId] = result ? result.prefix : globalPrefix;
 				module.exports = { varToExport: result };
 			}
-
-			console.log(guildPrefixes);
 		}
 		finally {
 			mongoose.connection.close();
