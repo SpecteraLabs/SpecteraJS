@@ -5,6 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "@discordjs/voice": "^0.5.0",
+    "discord-rpc": "^4.0.1",
     "discord.js": "^13.0.0-dev.1f8f3ab0f8dbd346154bbfa14a98726b8df25d57",
     "lavalink": "^2.11.0",
     "libsodium-wrappers": "^0.7.9",
