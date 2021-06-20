@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'guildCreate',
-	execute(guild, client) {
+	execute: async (guild, client) => {
 		guild.me.setNickname('[+] Obligator');
 		const activities = [`${client.guilds.cache.size} servers`, '+help for list of commands', 'Join https://discord.gg/WaqYbeFQUb for support'];
 		setInterval(function() {

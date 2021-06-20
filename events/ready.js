@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'ready',
-	execute(client) {
+	execute: async (client) => {
 		const baseFile = 'command-base.js';
 		const commandBase = require(`../commands/${baseFile}`);
 		const loadCommands = require(`../load-commands`);
