@@ -8,38 +8,17 @@ const client = new Discord.Client({
 });
 
 const config = require('./config.json');
-const loadCommands = require('./load-commands');
 
-client.on('guildUpdate', async (oldGuild, newGuild) => {
-	const channela = newGuild.channels.cache.find(ch => !oldGuild.channles.cache.has(ch.id));
-	const muterole = newGuild.roles.cache.find(r => r.name === 'Muted');
-	await channela.createOverwrite(muterole, {
-		SEND_MESSAGES: false,
-		CONNECT: false,
-		ADD_REACTIONS: false,
-	});
-});
-client.on('ready', async () => {
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
-	const baseFile = 'command-base.js';
-	const commandBase = require(`./commands/${baseFile}`);
-
-	loadCommands(client);
-	commandBase.loadPrefixes(client);
-	const activities = [`${client.guilds.cache.size} servers`, '+help for list of commands', 'Join https://discord.gg/WaqYbeFQUb for support'];
-	setInterval(function() {
-		const randAact = activities[Math.floor(Math.random() * activities.length)];
-		client.user.setActivity(randAact, { type: "WATCHING" });
-	}, 2800);
-	console.log(`${client.user.tag} is ready on ${client.guilds.cache.size} servers and ${client.users.cache.size} members using it`);
-});
-client.on('guildCreate', async (guild) => {
-	guild.me.setNickname('[+] Obligator');
-	const activities = [`${client.guilds.cache.size} servers`, '+help for list of commands', 'Join https://discord.gg/WaqYbeFQUb for support'];
-	setInterval(function() {
-		const randAact = activities[Math.floor(Math.random() * activities.length)];
-		client.user.setActivity(randAact, { type: "WATCHING" });
-	}, 2800);
-});
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args, client));
+	}
+	else {
+		client.on(event.name, (...args) => event.execute(...args, client));
+	}
+}
 
 client.login(config.token);
