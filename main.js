@@ -8,6 +8,7 @@ const client = new Discord.Client({
 });
 
 const config = require('./config.json');
+client.snipes = new Discord.Collection();
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
