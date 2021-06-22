@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
+const config = require('../../config.json');
 module.exports = {
 	commands: ['eval'],
 	callback: async (message, args, text, client) => {
@@ -23,7 +24,8 @@ module.exports = {
 				.addField(`Input:\n`, '```js\n' + `${args.join(' ')}` + '```', false)
 				.addField(`Output:\n`, '```js\n' + clean(evaled) + '```', true);
 
-			message.channel.send({ embeds: [resultSuccess] });
+			message.channel.send({ embeds: [resultSuccess] }).then(client.destroy())
+				.then(client.login(config.token));
 		}
 		catch (err) {
 			let resultError = new Discord.MessageEmbed()
