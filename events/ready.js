@@ -4,7 +4,6 @@ module.exports = {
 		const baseFile = 'command-base.js';
 		const commandBase = require(`../commands/${baseFile}`);
 		const loadCommands = require(`../load-commands`);
-
 		loadCommands(client);
 		commandBase.loadPrefixes(client);
 		const types = ['WATCHING', 'LISTENING', 'COMPETING', 'STREAMING', 'PLAYING'];

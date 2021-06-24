@@ -3,3 +3,5 @@ node_modules/
 /config.json
 /mongo.js
 /json.sqlite
+commands/music/
+player/
