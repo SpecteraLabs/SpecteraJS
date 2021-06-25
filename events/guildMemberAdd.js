@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
-const db = require('quick.db');
+const mongo = require('../mongo');
+const autoroleSchema = require('../schemas/autorole-schema');
 module.exports = {
 	name: 'guildMemberAdd',
 	execute: async (member, client) => {
-		const result = db.get(`autoRole_${member.guild.id}`);
-		const role = member.guild.roles.cache.find(r => r.name === result);
-		try {
-			member.roles.add(role);
-		}
-		catch (err) {
-			console.log(err);
-		}
+		await mongo().then(async (mongoose) => {
+			try {
+				const result = autoroleSchema.findOne({ _id: member.guild.id });
+				const role = member.guild.roles.cache.find(r => r.name === result);
+			}
+			finally {
+				mongoose.connection.close();
+			}
+		});
 	},
 };
