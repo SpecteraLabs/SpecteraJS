@@ -1,14 +1,34 @@
 /* eslint-disable no-unused-vars */
-const db = require('quick.db');
+const mongo = require('../../mongo');
+const autoroleSchema = require('../../schemas/autorole-schema');
 module.exports = {
 	commands: ['autorole', 'ar'],
 	permissions: 'ADMINISTRATOR',
 	permissionError: 'You do not have "ADMINISTRATOR" permission to run this command!',
 	callback: async (message, args, text, client) => {
 		if (!args.length) return message.reply(`Usage , +autorole <role>`);
+		const guildId = message.guild.id;
 		const arole = message.guild.roles.cache.get(args[0]) || message.mentions.roles.first() || message.guild.roles.cache.find(r => r.name === args[0]);
-		let p = db.set(`autoRole_${message.guild.id}`, arole.name);
-		console.log(p);
+		const roleId = arole.id;
+		await mongo().then(async (mongoose) => {
+			try {
+				autoroleSchema.findOneAndUpdate(
+					{
+						_id: guildId,
+					},
+					{
+						_id: guildId,
+						roleId,
+					},
+					{
+						upsert: true,
+					},
+				);
+			}
+			finally {
+				mongoose.connection.close();
+			}
+		});
 		if (!arole) {
 			message.reply('Invalid role!');
 		}

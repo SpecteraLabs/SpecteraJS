@@ -8,6 +8,9 @@ const client = new Discord.Client({
 }).setMaxListeners(0);
 
 const config = require('./config.json');
+client.config = require('./configurations/config');
+client.emotes = client.config.emotes;
+client.colors = client.config.colors;
 client.snipes = new Discord.Collection();
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
