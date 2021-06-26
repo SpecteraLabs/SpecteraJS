@@ -11,9 +11,7 @@ module.exports = {
 				if (!message.member.roles.cache.some(r => r === role)) {
 					message.member.roles.add(role);
 				}
-				else {
-					return;
-				}
+				if (message.member.roles.cache.some(r => r === role) || message.webhookId) return;
 			}
 			finally {
 				mongoose.connection.close();
