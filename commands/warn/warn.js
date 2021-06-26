@@ -25,29 +25,24 @@ module.exports = {
 			reason,
 		};
 
-		await mongo().then(async (mongoose) => {
-			try {
-				await warnSchema.findOneAndUpdate(
-					{
-						guildId,
-						userId,
+		await mongo().then(async () => {
+			await warnSchema.findOneAndUpdate(
+				{
+					guildId,
+					userId,
+				},
+				{
+					guildId,
+					userId,
+					$push: {
+						warnings: warning,
 					},
-					{
-						guildId,
-						userId,
-						$push: {
-							warnings: warning,
-						},
-					},
-					{
-						upsert: true,
-					},
-				);
-				message.channel.send(`${target.tag} has been warned successfully\n**Reason:** ${reason}`);
-			}
-			finally {
-				mongoose.connection.close();
-			}
+				},
+				{
+					upsert: true,
+				},
+			);
+			message.channel.send(`${target.tag} has been warned successfully\n**Reason:** ${reason}`);
 		});
 	},
 };

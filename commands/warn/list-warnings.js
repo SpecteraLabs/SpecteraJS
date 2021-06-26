@@ -19,38 +19,33 @@ module.exports = {
 		const guildId = message.guild.id;
 		const userId = target.id;
 
-		await mongo().then(async (mongoose) => {
-			try {
-				const results = await warnSchema.findOne({
-					guildId,
-					userId,
-				});
-				if (results) {
-					let reply = ``;
-					let i = 0;
-					let x = 0;
-					for (const warning of results.warnings) {
-						const { author, timestamp, reason } = warning;
-						x += 1;
-						reply += `**Warning number:** ${x}\n**Responsible Moderator:** ${author}\n **Date:** ${new Date(
-							timestamp,
-						).toLocaleDateString()}\n **Reason:** "${reason}"\n\n`;
-						i += 1;
-					}
-					const hmm = new Discord.MessageEmbed()
-						.setColor('#EA2B1F')
-						.setTitle(`${target.tag}'s warnings`)
-						.setDescription(`**__Warnings__** : ${i}\n ${reply}`)
-						.setFooter(`Requested by ${message.author.tag}`)
-						.setTimestamp();
-					message.reply({ embeds: [hmm] });
+		await mongo().then(async () => {
+			const results = await warnSchema.findOne({
+				guildId,
+				userId,
+			});
+			if (results) {
+				let reply = ``;
+				let i = 0;
+				let x = 0;
+				for (const warning of results.warnings) {
+					const { author, timestamp, reason } = warning;
+					x += 1;
+					reply += `**Warning number:** ${x}\n**Responsible Moderator:** ${author}\n **Date:** ${new Date(
+						timestamp,
+					).toLocaleDateString()}\n **Reason:** "${reason}"\n\n`;
+					i += 1;
 				}
-				else {
-					message.reply(`No warnings found for ${target.tag}`, { allowedMentions: { repliedUser: false } });
-				}
+				const hmm = new Discord.MessageEmbed()
+					.setColor('#EA2B1F')
+					.setTitle(`${target.tag}'s warnings`)
+					.setDescription(`**__Warnings__** : ${i}\n ${reply}`)
+					.setFooter(`Requested by ${message.author.tag}`)
+					.setTimestamp();
+				message.reply({ embeds: [hmm] });
 			}
-			finally {
-				mongoose.connection.close();
+			else {
+				message.reply(`No warnings found for ${target.tag}`, { allowedMentions: { repliedUser: false } });
 			}
 		});
 	},

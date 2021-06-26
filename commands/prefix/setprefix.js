@@ -14,32 +14,27 @@ module.exports = {
 	permissions: 'ADMINISTRATOR',
 	callback: async (message, args, text, client) => {
 		await mongo().then(async (mongoose) => {
-			try {
-				const guildId = message.guild.id;
-				const prefix = args[0];
+			const guildId = message.guild.id;
+			const prefix = args[0];
 
-				await commandPrefixSchema.findOneAndUpdate(
-					{
-						_id: guildId,
-					},
-					{
-						_id: guildId,
-						prefix,
-					},
-					{
-						upsert: true,
-					},
-				);
+			await commandPrefixSchema.findOneAndUpdate(
+				{
+					_id: guildId,
+				},
+				{
+					_id: guildId,
+					prefix,
+				},
+				{
+					upsert: true,
+				},
+			);
 
-				message.reply(`The prefix for this bot is now ${prefix}`);
-				message.guild.me.setNickname(`[${prefix}] Obligator`);
-				message.channel.send(`I changed my nickname to [${prefix}] Obligator so that you can remember my prefix`);
+			message.reply(`The prefix for this bot is now ${prefix}`);
+			message.guild.me.setNickname(`[${prefix}] Obligator`);
+			message.channel.send(`I changed my nickname to [${prefix}] Obligator so that you can remember my prefix`);
 
-				commandBase.updateCache(guildId, prefix);
-			}
-			finally {
-				mongoose.connection.close();
-			}
+			commandBase.updateCache(guildId, prefix);
 		});
 	},
 };

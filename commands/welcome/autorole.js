@@ -18,24 +18,19 @@ module.exports = {
 		const guildId = message.guild.id;
 		const roleId = arole.id;
 		await mongo().then(async (mongoose) => {
-			try {
-				await AutoRoleSchema.findOneAndUpdate(
-					{
-						_id: guildId,
-					},
-					{
-						_id: guildId,
-						roleId,
-					},
-					{
-						upsert: true,
-					},
-				);
-				message.reply(`Server AutoRole is now ${args[0]}`);
-			}
-			finally {
-				mongoose.connection.close();
-			}
+			await AutoRoleSchema.findOneAndUpdate(
+				{
+					_id: guildId,
+				},
+				{
+					_id: guildId,
+					roleId,
+				},
+				{
+					upsert: true,
+				},
+			);
+			message.reply(`Server AutoRole is now ${args[0]}`);
 		});
 	},
 };
