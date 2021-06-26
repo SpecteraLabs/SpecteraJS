@@ -3,11 +3,12 @@ const mongo = require("../mongo");
 const AutoRoleSchema = require("../schemas/auto-role-schema");
 module.exports = {
 	name: "message",
-	execute: async (message) => {
+	execute: async (message, client) => {
 		await mongo().then(async (mongoose) => {
 			try {
-				const result = await AutoRoleSchema.findOne({ _id: message.guild.id });
-				if (result) {
+				const guildId = message.guild.id;
+				const result = await AutoRoleSchema.findOne({ _id: guildId });
+				if (result != null) {
 					const role = message.guild.roles.cache.find(r => r.id === result.roleId);
 					if (!message.member.roles.cache.some(r => r === role)) {
 						message.member.roles.add(role);

@@ -2,9 +2,7 @@
 /* eslint-disable no-shadow-restricted-names */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-mixed-spaces-and-tabs */
-const loadCommands = require("../load-commands");
 const { MessageEmbed } = require("discord.js");
-const commandPrefixSchema = require("../schemas/command-prefix-schema");
 
 module.exports = {
 	commands: ["help", "h"],
@@ -16,10 +14,10 @@ module.exports = {
 			const halpembed = new MessageEmbed()
 				.setTitle("Help")
 				.addFields(
-					{ commands: "Prefix", value: "`setprefix`" },
-					{ commands: "Misc", value: "`ping` `docs` `v13docs`" },
+					{ name: "Prefix", value: "`setprefix`" },
+					{ name: "Misc", value: "`ping` `docs` `v13docs`" },
 					{
-						commands: "Moderation",
+						name: "Moderation",
 						value: "`warn` `clearwarn` `listwarns` `mute` `kick` `ban`",
 					},
 				)
