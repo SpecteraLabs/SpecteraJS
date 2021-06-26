@@ -158,7 +158,6 @@ module.exports.loadPrefixes = async (client) => {
 
 				const result = await commandPrefixSchema.findOne({ _id: guildId });
 				guildPrefixes[guildId] = result ? result.prefix : globalPrefix;
-				module.exports = { varToExport: result };
 			}
 		}
 		finally {

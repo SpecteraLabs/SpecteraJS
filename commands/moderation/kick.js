@@ -3,7 +3,9 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
 	commands: ['kick'],
 	minArgs: 2,
+	maxArgs: 22,
 	permissions: 'KICK_MEMBERS',
+	expectedArgs: '<target> <reason>',
 	permissionError: 'You do not have permissions to kick members!',
 	callback: async (message, args, text, client) => {
 		const reason = args.join(' ').slice(22);
@@ -18,7 +20,7 @@ module.exports = {
 			try {
 				target.kick(reason);
 				client.setTimeout(() => message.delete(), 10);
-				message.reply({ embeds : [succEmbed], allowedMentions: { repliedUser: false } })
+				message.channel.send({ embeds : [succEmbed], allowedMentions: { repliedUser: false } })
 					.then(msg => {
 						client.setTimeout(() => msg.delete(), 5000);
 					});

@@ -3,7 +3,9 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
 	commands: ['ban'],
 	minArgs: 2,
+	maxArgs: 22,
 	permissions: 'BAN_MEMBERS',
+	expectedArgs: '<target> <reason>',
 	permissionError: 'You do not have permissions to ban members!',
 	callback: async (message, args, text, client) => {
 		const target = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.displayName === args[0]) || message.guild.members.cache.find(r => r.user.tag === args[0]);
@@ -18,7 +20,7 @@ module.exports = {
 			try {
 				target.ban({ reason: reason });
 				client.setTimeout(() => message.delete(), 10);
-				message.reply({ embeds : [succEmbed], allowedMentions: { repliedUser: false } })
+				message.channel.send({ embeds : [succEmbed], allowedMentions: { repliedUser: false } })
 					.then(msg => {
 						client.setTimeout(() => msg.delete(), 5000);
 					});
