@@ -10,11 +10,10 @@ module.exports = {
 				const result = await AutoRoleSchema.findOne({ _id: guildId });
 				if (result != null) {
 					const role = message.guild.roles.cache.find(r => r.id === result.roleId);
-					const hasRole = message.member.roles.cache.some(r => r === role);
-					if (!hasRole) {
+					if (!message.member.roles.cache.some(r => r === role)) {
 						message.member.roles.add(role);
 					}
-					if (hasRole || message.webhookId) return;
+					if (message.member.roles.cache.some(r => r === role) || message.webhookId) return;
 				}
 			}
 			finally {
