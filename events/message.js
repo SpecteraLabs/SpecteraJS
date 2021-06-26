@@ -7,11 +7,13 @@ module.exports = {
 		await mongo().then(async (mongoose) => {
 			try {
 				const result = await AutoRoleSchema.findOne({ _id: message.guild.id });
-				const role = message.guild.roles.cache.find(r => r.id === result.roleId);
-				if (!message.member.roles.cache.some(r => r === role)) {
-					message.member.roles.add(role);
+				if (result) {
+					const role = message.guild.roles.cache.find(r => r.id === result.roleId);
+					if (!message.member.roles.cache.some(r => r === role)) {
+						message.member.roles.add(role);
+					}
+					if (message.member.roles.cache.some(r => r === role) || message.webhookId) return;
 				}
-				if (message.member.roles.cache.some(r => r === role) || message.webhookId) return;
 			}
 			finally {
 				mongoose.connection.close();
