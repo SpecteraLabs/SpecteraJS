@@ -13,7 +13,7 @@ module.exports = {
 					if (!message.member.roles.cache.some(r => r === role)) {
 						message.member.roles.add(role);
 					}
-					if (message.member.roles.cache.some(r => r === role) || message.webhookId) return;
+					if (message.member.roles.cache.some(r => r === role) || message.fetchWebhook) return;
 				}
 			}
 			finally {
