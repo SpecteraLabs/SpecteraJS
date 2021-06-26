@@ -6,6 +6,7 @@ module.exports = {
 	execute: async (message, client) => {
 		await mongo().then(async (mongoose) => {
 			try {
+				if (message.fetchWebhook) return;
 				const guildId = message.guild.id;
 				const result = await AutoRoleSchema.findOne({ _id: guildId });
 				if (result != null) {
@@ -13,7 +14,7 @@ module.exports = {
 					if (!message.member.roles.cache.some(r => r === role)) {
 						message.member.roles.add(role);
 					}
-					if (message.member.roles.cache.some(r => r === role) || message.fetchWebhook) return;
+					if (message.member.roles.cache.some(r => r === role)) return;
 				}
 			}
 			finally {
