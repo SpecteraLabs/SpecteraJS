@@ -4,7 +4,7 @@ module.exports = {
 		error: "<a:ErrorTicko:853278103794089985>",
 	},
 	colors: {
-		success: "#44CF6C",
-		error: "#EA2B1F",
+		success: "#8f82ff",
+		error: "#e31212",
 	},
 };

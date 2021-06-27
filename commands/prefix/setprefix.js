@@ -15,7 +15,8 @@ module.exports = {
 	callback: async (message, args, text, client) => {
 		await mongo().then(async (mongoose) => {
 			const guildId = message.guild.id;
-			const prefix = args[0];
+			const prefi = args[0];
+			const prefix = prefi.toLowerCase();
 
 			await commandPrefixSchema.findOneAndUpdate(
 				{
@@ -30,9 +31,9 @@ module.exports = {
 				},
 			);
 
-			message.reply(`The prefix for this bot is now ${prefix}`);
-			message.guild.me.setNickname(`[${prefix}] Obligator`);
-			message.channel.send(`I changed my nickname to [${prefix}] Obligator so that you can remember my prefix`);
+			message.reply(`The prefix for this bot is now ${prefi}`);
+			message.guild.me.setNickname(`[${prefi}] Obligator`);
+			message.channel.send(`I changed my nickname to [${prefi}] Obligator so that you can remember my prefix`);
 
 			commandBase.updateCache(guildId, prefix);
 		});
