@@ -7,7 +7,7 @@ module.exports = {
 		if (!message.author.id === "564468550727761920") return message.reply("You cannot use this command!");
 		const clean = (taxt) => {
 			if (typeof taxt === "string") {
-				return text
+				return taxt
 					.replaceAll("`", "`" + String.fromCharCode(8203))
 					.replaceAll("@", "@" + String.fromCharCode(8203));
 			}
@@ -28,9 +28,7 @@ module.exports = {
 				.addField(`Output:\n`, "```js\n" + clean(evaled) + "```", true);
 
 			message.channel
-				.send({ embeds: [resultSuccess] })
-				.then(client.destroy())
-				.then(client.login(config.token));
+				.send({ embeds: [resultSuccess] });
 		}
 		catch (err) {
 			let resultError = new Discord.MessageEmbed()
