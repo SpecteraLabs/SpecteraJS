@@ -3,6 +3,7 @@ const messageLogSchema = require('../schemas/message-log-schema');
 module.exports = {
 	name: 'messageDelete',
 	execute: async (message, client) => {
+		if (message.partial) return;
 		client.snipes.set(message.channel.id, {
 			content: message.content,
 			author: message.author.tag,

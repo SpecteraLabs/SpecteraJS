@@ -5,6 +5,8 @@ const Discord = require('discord.js');
 
 module.exports = {
 	commands: ['messagelogs', 'mlogs'],
+	minArgs: 1,
+	expectedArgs: '<channel>',
 	permission: 'ADMINISTRATOR',
 	permissionError: 'You cannot set message log channel!',
 	callback: async (message, args, text, client) => {
