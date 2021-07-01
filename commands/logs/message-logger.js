@@ -7,7 +7,7 @@ module.exports = {
 	commands: ['messagelogs', 'mlogs'],
 	minArgs: 1,
 	expectedArgs: '<channel>',
-	permission: 'ADMINISTRATOR',
+	permissions: 'ADMINISTRATOR',
 	permissionError: 'You cannot set message log channel!',
 	callback: async (message, args, text, client) => {
 		if (!args.length) return;
