@@ -10,9 +10,10 @@ module.exports = {
 		const guildId = newMessage.guild.id;
 		const result = await messageLogSchema.findOne({ _id: guildId });
 		if (!result) return;
+		if (newMessage.fetchWebhook) return;
 		const ochannel = newMessage.guild.channels.cache.find(ch => ch.id === result.channelId);
 		const embed = new MessageEmbed()
-			.setAuthor(newMessage.author.tag, newMessage.member.user.displayAvatarURL())
+			.setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL())
 			.setTitle(`Message edited in #${newMessage.channel.name}`)
 			.setDescription(`**Before:** ${wasMessage}\n**After:** ${isMessage}`)
 			.setColor(`${client.colors.error}`)

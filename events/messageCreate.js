@@ -2,7 +2,7 @@
 const mongo = require("../mongo");
 const AutoRoleSchema = require("../schemas/auto-role-schema");
 module.exports = {
-	name: "message",
+	name: "messageCreate",
 	execute: async (message, client) => {
 		await mongo().then(async (mongoose) => {
 			if (message.fetchWebhook) return;
