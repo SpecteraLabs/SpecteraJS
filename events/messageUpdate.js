@@ -13,7 +13,7 @@ module.exports = {
 		const ochannel = newMessage.guild.channels.cache.find(ch => ch.id === result.channelId);
 		const embed = new MessageEmbed()
 			.setAuthor(newMessage.author.tag, newMessage.member.user.displayAvatarURL())
-			.setTitle(`Message edited in ${newMessage.channel.name}`)
+			.setTitle(`Message edited in #${newMessage.channel.name}`)
 			.setDescription(`**Before:** ${wasMessage}\n**After:** ${isMessage}`)
 			.setColor(`${client.colors.error}`)
 			.setFooter(`ID: ${newMessage.member.user.id}`)

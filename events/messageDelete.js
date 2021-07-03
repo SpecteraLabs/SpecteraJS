@@ -19,7 +19,7 @@ module.exports = {
 			const ochannel = message.guild.channels.cache.find(ch => ch.id === result.channelId);
 			const embed = new MessageEmbed()
 				.setAuthor(message.author.tag, message.member.user.displayAvatarURL())
-				.setTitle(`Message deleted in ${message.channel.name}`)
+				.setTitle(`Message deleted in #${message.channel.name}`)
 				.setDescription(message.content)
 				.setColor(`${client.colors.error}`)
 				.setFooter(`ID: ${message.member.user.id}`)
