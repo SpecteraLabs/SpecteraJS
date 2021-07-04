@@ -7,6 +7,7 @@ module.exports = {
 		await mongo().then(async (mongoose) => {
 			if (message.fetchWebhook) return;
 			if (message.partial) return;
+			if (message.channel.type === 'dm') return;
 			const guildId = message.guild.id;
 			const result = await AutoRoleSchema.findOne({ _id: guildId });
 			if (result != null) {

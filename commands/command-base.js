@@ -74,7 +74,9 @@ module.exports = (client, commandOptions) => {
 
 		validatePermissions(permissions);
 	}
-	client.on('message', async (message) => {
+	client.on('messageCreate', async (message) => {
+		if (message.author.bot) return;
+		if (message.channel.type === 'dm') return;
 		const { member, content, guild } = message;
 
 		const prefix = guildPrefixes[guild.id] || globalPrefix;
