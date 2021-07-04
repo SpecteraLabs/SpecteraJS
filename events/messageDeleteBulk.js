@@ -8,13 +8,17 @@ module.exports = {
 		const guildId = ms.guild.id;
 		const result = await messageLogSchema.findOne({ _id: guildId });
 		if (!result) return;
+		let value = '';
+		let count = 0;
 		const embed = new MessageEmbed()
-			.setTitle(`Message bulk deleted in #${ms.channel.name}`)
 			.setColor(`${client.colors.error}`)
 			.setTimestamp();
 		for (const message of messages.values()) {
 			if (message.partial) return;
-			embed.addField(`\u200B`, `**${message.author.tag}**: ${message.content}\n`);
+			count++;
+			embed.setTitle(`${count} messages purges in #${ms.channel.name}`);
+			value += `[${message.author.tag}]: ${message.content}\n`;
+			embed.setDescription(`${value}`);
 		}
 		const channel = ms.guild.channels.cache.find(ch => ch.id === result.channelId);
 		channel.send({ embeds: [embed] });

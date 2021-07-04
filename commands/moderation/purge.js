@@ -6,7 +6,7 @@ module.exports = {
 	permissions: 'MANAGE_MESSAGES',
 	permissionError: 'You cannot purge messages in this server!',
 	callback: async (message, args, text, client) => {
-		const amount = parseInt(args[0]) + 1;
+		const amount = parseInt(args[0]);
 
 		if (isNaN(amount)) {
 			return message.reply('You need to enter a number to purge!');
