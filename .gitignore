@@ -4,3 +4,6 @@ node_modules/
 /mongo.js
 /json.sqlite
 assets/
+commands/command-base.js
+/load-commands.js
+/command.js
