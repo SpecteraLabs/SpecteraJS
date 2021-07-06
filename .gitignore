@@ -6,4 +6,4 @@ node_modules/
 assets/
 commands/command-base.js
 /load-commands.js
-/command.js
+command.js
