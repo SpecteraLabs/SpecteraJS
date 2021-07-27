@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 module.exports = {
 	name: 'ready',
 	execute: async (client) => {
@@ -14,5 +15,10 @@ module.exports = {
 			client.user.setActivity(randAact, { type: typo });
 		}, 2800);
 		console.log(`${client.user.tag} is ready on ${client.guilds.cache.size} servers and ${client.users.cache.size} members using it`);
+		const data = {
+			name: 'ping',
+			description: 'Replies with the bot\'s latency',
+		};
+		const command = await client.guilds.cache.get('799508367478620222').commands.create(data);
 	},
 };
