@@ -12,6 +12,7 @@ client.config = require('./configurations/config');
 client.emotes = client.config.emotes;
 client.colors = client.config.colors;
 client.snipes = new Discord.Collection();
+client.commands = new Discord.Collection();
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
@@ -23,6 +24,12 @@ for (const file of eventFiles) {
 	else {
 		client.on(event.name, (...args) => event.execute(...args, client));
 	}
+}
+const commandFiles = fs.readdirSync('./slashys').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./slashys/${file}`);
+	client.commands.set(command.name, command);
 }
 
 client.login(config.token);
