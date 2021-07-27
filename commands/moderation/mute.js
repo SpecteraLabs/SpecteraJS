@@ -26,7 +26,7 @@ module.exports = {
 				);
 			});
 			muterole = await message.guild.roles.create({
-				commands: "Muted",
+				name: "Muted",
 				color: "#696969",
 				reason: "This server needed a MuteRole",
 			});

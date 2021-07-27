@@ -4,7 +4,7 @@ const warnSchema = require('../../schemas/warn-schema');
 const MessageEmbed = require('discord.js').MessageEmbed;
 
 module.exports = {
-	commands: ['cwarn', 'clearwarn', 'cw'],
+	commands: ['removeallwarns'],
 	minArgs: 1,
 	expectedArgs: "<Target user's @>",
 	permissions: 'KICK_MEMBERS',
