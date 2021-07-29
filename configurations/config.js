@@ -5,6 +5,6 @@ module.exports = {
 	},
 	colors: {
 		success: "#8f82ff",
-		error: "#e31212",
+		error: "#DD5E53",
 	},
 };

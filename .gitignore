@@ -3,3 +3,7 @@ node_modules/
 /config.json
 /mongo.js
 /json.sqlite
+assets/
+commands/command-base.js
+/load-commands.js
+command.js

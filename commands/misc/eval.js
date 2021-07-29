@@ -4,14 +4,16 @@ const config = require("../../config.json");
 module.exports = {
 	commands: ["eval"],
 	callback: async (message, args, text, client) => {
-		if (!message.author.id === "564468550727761920") return message.reply("You cannot use this command!");
+		if (!message.author.id === "564468550727761920") {return message.reply("You cannot use this command!");}
 		const clean = (taxt) => {
 			if (typeof taxt === "string") {
 				return taxt
 					.replaceAll("`", "`" + String.fromCharCode(8203))
 					.replaceAll("@", "@" + String.fromCharCode(8203));
 			}
-			else {return taxt;}
+			else {
+				return taxt;
+			}
 		};
 		try {
 			var result = args.join(" ");
@@ -27,8 +29,7 @@ module.exports = {
 				.addField(`Input:\n`, "```js\n" + `${args.join(" ")}` + "```", false)
 				.addField(`Output:\n`, "```js\n" + clean(evaled) + "```", true);
 
-			message.channel
-				.send({ embeds: [resultSuccess] });
+			message.channel.send({ embeds: [resultSuccess] });
 		}
 		catch (err) {
 			let resultError = new Discord.MessageEmbed()
